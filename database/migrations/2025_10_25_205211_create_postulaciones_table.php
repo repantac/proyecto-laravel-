@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    // Ejecuta la migración: crea la tabla de postulaciones en la base de datos
     public function up(): void
     {
         Schema::create('postulaciones', function (Blueprint $table) {
@@ -17,9 +15,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    // Revierte la migración: elimina la tabla si es necesario
     public function down(): void
     {
         Schema::dropIfExists('postulaciones');

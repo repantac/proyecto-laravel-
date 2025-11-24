@@ -9,35 +9,23 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    // Funcionalidades que vienen con el modelo
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // Campos que se pueden llenar al crear o actualizar un usuario
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // Campos que no se muestran por seguridad (como la contraseña)
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Convierte algunos campos a tipos específicos (fechas, contraseñas encriptadas, etc.)
     protected function casts(): array
     {
         return [

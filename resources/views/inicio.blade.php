@@ -8,6 +8,8 @@
     
     <!-- Bootstrap CSS desde CDN para estilos responsivos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS desde CDN (necesario para los alerts) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- La hoja de CSS personalizada -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> 
 
@@ -43,11 +45,36 @@
                     </div>
                     <!-- Cuerpo de la tarjeta -->
                     <div class="card-body">
-                        <!-- Mostrar mensaje de error si las credenciales son incorrectas -->
-                        @if(session('error'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ session('error') }}
+                        <!-- Mostrar mensaje de éxito si existe (con auto-dismiss después de 4 segundos) -->
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-success">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
+                            <script>
+                                setTimeout(function() {
+                                    const alert = document.getElementById('alert-success');
+                                    if (alert) {
+                                        alert.style.display = 'none';
+                                    }
+                                }, 4000);
+                            </script>
+                        @endif
+
+                        <!-- Mostrar mensaje de error si las credenciales son incorrectas (con auto-dismiss después de 4 segundos) -->
+                        @if(session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-error">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                            <script>
+                                setTimeout(function() {
+                                    const alert = document.getElementById('alert-error');
+                                    if (alert) {
+                                        alert.style.display = 'none';
+                                    }
+                                }, 4000);
+                            </script>
                         @endif
 
                         <!-- Formulario de inicio de sesión -->

@@ -6,11 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    // Ejecuta las migraciones: crea las tablas en la base de datos
     public function up(): void
     {
+        // Crea la tabla de usuarios con sus campos básicos
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,12 +20,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // Crea la tabla para tokens de restablecimiento de contraseña
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Crea la tabla de sesiones para manejar las sesiones de usuario
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -37,9 +38,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    // Revierte las migraciones: elimina las tablas si es necesario
     public function down(): void
     {
         Schema::dropIfExists('users');
