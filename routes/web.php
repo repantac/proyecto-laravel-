@@ -1,39 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CasoController;
+use App\Http\Controllers\ClienteController;
 
-// Ruta 1: para mostrar el formulario de inicio de sesión
-Route::get('/', function () {
-    return view('inicio');
-});
+// Ruta para mostrar el formulario de inicio de sesión
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 
-// Ruta 2: para procesar el inicio de sesión
-Route::post('/login', function (Request $request) {
-    // Validar el usuario, la clave y el tipo de usuario
-    $usuario = $request->input('usuario');
-    $clave = $request->input('clave');
-    $tipo_usuario = $request->input('tipo_usuario');
+// Ruta para procesar el inicio de sesión (autenticación real)
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-    if (!empty($usuario) && !empty($clave) && !empty($tipo_usuario)) {
-        // Si el usuario es válido, redirigir según el tipo de usuario
-        if ($tipo_usuario === 'cliente') {
-            return redirect('/portal-cliente')->with('usuario', $usuario);
-        } elseif ($tipo_usuario === 'profesional') {
-            return redirect('/portal-profesional')->with('usuario', $usuario);
-        }
-    } else {
-        // Si el usuario no es válido, volver a mostrar el formulario con un mensaje de error
-        return back()->with('error', 'Por favor complete todos los campos');
-    }
-});
+// Ruta para cerrar sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Ruta 3: para el portal de clientes
+// Ruta para el portal de clientes (mantenemos esta por si la necesitas)
 Route::get('/portal-cliente', function () {
     return view('portal-cliente');
-});
+})->name('portal.cliente');
 
-// Ruta 4: para el portal de profesionales
-Route::get('/portal-profesional', function () {
-    return view('portal-profesional');
-});
+// Rutas para el portal de profesionales - gestión de casos (CRUD completo)
+// Estas rutas usan el controlador de casos y permiten todas las operaciones
+// Nota: El middleware 'auth' está comentado temporalmente para facilitar las pruebas
+Route::resource('casos', CasoController::class); // ->middleware('auth')
+
+// Ruta para crear clientes desde el modal (solo método store)
+Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
