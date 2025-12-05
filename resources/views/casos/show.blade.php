@@ -58,7 +58,7 @@
                                                 @elseif($caso->estado == 'En proceso') bg-primary
                                                 @elseif($caso->estado == 'En revisión') bg-warning
                                                 @else bg-secondary
-                                                @endif" style="font-size: 1rem;">
+                                                @endif" class="badge-normal">
                                                 {{ $caso->estado }}
                                             </span>
                                         </td>
@@ -66,7 +66,7 @@
                                     <tr>
                                         <th>Progreso</th>
                                         <td>
-                                            <div class="progress" style="height: 25px;">
+                                            <div class="progress progress-detail">
                                                 <div class="progress-bar 
                                                     @if($caso->progreso == 100) bg-success
                                                     @elseif($caso->progreso >= 50) bg-warning

@@ -16,7 +16,7 @@
     <!-- Fuentes desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Contenedor principal -->
@@ -24,41 +24,40 @@
         <!-- Fila principal -->
         <div class="row">
             <!-- Sidebar de navegación -->
-            <div class="col-md-3 bg-dark text-white sidebar d-flex flex-column" style="min-height: 100vh;">
-                <div class="p-5">
+            <div class="col-md-2 text-white sidebar d-flex flex-column">
+                <div class="p-4 d-flex flex-column sidebar-inner">
                     <!-- Logo de la empresa -->
-                    <div class="text-center mb-5 p-5">
-                        <img src="{{ asset('css/logoprovisional.png') }}" alt="Logo Te Apoyamos S.A.S." class="mb-3">
+                    <div class="text-center mb-4">
+                        <img src="{{ asset('css/logocuadrado.png') }}" alt="Logo Te Apoyamos S.A.S." class="mb-3 sidebar-logo">
                     </div>
                     
-                    <!-- Menú de navegación -->
-                    <nav class="nav flex-column flex-grow-1">
-                        <div class="mb-4 text-center">
-                            <a class="nav-link active text-white py-4" href="#casos">📁 Mis Casos</a>
-                            <a class="nav-link text-white py-4" href="#perfil">👤 Perfil de Usuario</a>
-                            <a class="nav-link text-white py-4" href="#archivos">📎 Archivos</a>
-                        </div>
+                    <!-- Menú de navegación centrado -->
+                    <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1 sidebar-menu-container">
+                        <nav class="nav flex-column text-center">
+                            <a class="nav-link active text-white py-3" href="#casos">📁 Mis Casos</a>
+                            <a class="nav-link text-white py-3" href="#perfil">👤 Perfil</a>
+                            <a class="nav-link text-white py-3" href="#archivos">📎 Archivos</a>
+                        </nav>
                         
-                        <div class="mt-auto py-5 text-center">
-                            <div class="d-flex justify-content-center align-items-center mb-3">
-                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
-                                </form>
-                            </div>
+                        <!-- Botón de cerrar sesión -->
+                        <div class="mt-4 text-center">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
+                            </form>
                         </div>
-                    </nav>
+                    </div>
                 </div>
             </div>
             
             <!-- Contenido principal -->
-            <div class="col-md-9 py-5">
+            <div class="col-md-10 py-5">
                 <div class="p-4">
                     <!-- Encabezado del portal -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h3>Te damos la bienvenida, {{ Auth::user()->name ?? 'Profesional' }}</h3>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="mb-5">Te damos la bienvenida, {{ Auth::user()->name ?? 'Profesional' }}</h3>
                         <!-- Botón para crear un nuevo caso -->
-                        <a href="{{ route('casos.create') }}" class="btn btn-primary">Nuevo Caso</a>
+                        <a href="{{ route('casos.create') }}" class="btn btn-primary mb-5">Nuevo Caso</a>
                     </div>
 
                     <!-- Contenedor para mensajes (se oculta completamente cuando no hay mensajes) -->
@@ -114,7 +113,7 @@
                     @endif
                     
                     <!-- Resumen de casos gestionados -->
-                    <div class="card mx-auto" style="max-width: 95%;">
+                    <div class="card mx-auto mt-5 card-casos">
                         <div class="card-header">
                             <h5 class="mb-0">Casos asignados</h5>
                         </div>
@@ -154,7 +153,7 @@
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <div class="progress" style="height: 20px;">
+                                                        <div class="progress">
                                                             <div class="progress-bar 
                                                                 @if($caso->progreso == 100) bg-success
                                                                 @elseif($caso->progreso >= 50) bg-warning
@@ -172,14 +171,14 @@
                                                     <td>
                                                         <div class="d-flex gap-1">
                                                             <!-- Botón para ver detalles del caso (más pequeño) -->
-                                                            <a href="{{ route('casos.show', $caso->id) }}" class="btn btn-xs btn-primary" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;">Detalles</a>
+                                                            <a href="{{ route('casos.show', $caso->id) }}" class="btn btn-xs btn-primary">Detalles</a>
                                                             <!-- Botón para editar el caso (más pequeño) -->
-                                                            <a href="{{ route('casos.edit', $caso->id) }}" class="btn btn-xs btn-success" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;">Editar</a>
+                                                            <a href="{{ route('casos.edit', $caso->id) }}" class="btn btn-xs btn-success">Editar</a>
                                                             <!-- Formulario para eliminar el caso (más pequeño) -->
                                                             <form action="{{ route('casos.destroy', $caso->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este caso?');">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-xs btn-danger" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;">Eliminar</button>
+                                                                <button type="submit" class="btn btn-xs btn-danger">Eliminar</button>
                                                             </form>
                                                         </div>
                                                     </td>

@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <!-- Mostrar errores de validación si existen (con letra más grande) -->
                         @if($errors->any())
-                            <div class="alert alert-danger" style="font-size: 20px;">
+                            <div class="alert alert-danger alert-large">
                                 <ul class="mb-0">
                                     @foreach($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -49,7 +49,7 @@
                                 <label for="codigo_caso" class="form-label">Código del Caso</label>
                                 <input type="text" class="form-control" id="codigo_caso" 
                                        value="{{ $caso->codigo_caso }}" 
-                                       readonly disabled style="background-color: #e9ecef;">
+                                       readonly disabled class="input-readonly">
                                 <small class="form-text text-muted">El código del caso no se puede modificar</small>
                             </div>
 
@@ -150,12 +150,12 @@
                 <form id="formCrearCliente">
                     <div class="modal-body">
                         <!-- Mensaje de error si existe -->
-                        <div id="errorCliente" class="alert alert-danger d-none alert-dismissible fade show" style="font-size: 20px;">
+                        <div id="errorCliente" class="alert alert-danger d-none alert-dismissible fade show alert-large">
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                         
                         <!-- Mensaje de éxito si existe -->
-                        <div id="successCliente" class="alert alert-success d-none alert-dismissible fade show" style="font-size: 20px;">
+                        <div id="successCliente" class="alert alert-success d-none alert-dismissible fade show alert-large">
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
 
