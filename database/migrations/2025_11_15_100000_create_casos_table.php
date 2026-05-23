@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    // Crea la tabla de casos
     public function up(): void
-    {
+    {    // Crea la tabla de casos
+
         Schema::create('casos', function (Blueprint $table) {
             // ID que Laravel crea solo
             $table->id();
