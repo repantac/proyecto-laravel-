@@ -74,7 +74,7 @@
                 @endif
 
                 <!-- Formulario de inicio de sesión -->
-                <form action="/login" method="POST" class="login-form-content">
+                <form action="{{ route('login.post') }}" method="POST" class="login-form-content">
                     <!-- Token de seguridad de Laravel -->
                     @csrf
 

@@ -46,7 +46,7 @@ class AuthController extends Controller
 
             // Lo lleva a su portal según el tipo de usuario
             if ($request->tipo_usuario === 'cliente') {
-                return redirect('/portal-cliente');
+                return redirect()->route('portal.cliente');
             } else {
                 return redirect()->route('casos.index');
             }
@@ -66,6 +66,6 @@ class AuthController extends Controller
         session()->flush();
 
         // Lo lleva de vuelta al login
-        return redirect('/')->with('success', 'Sesión cerrada exitosamente');
+        return redirect()->route('login')->with('success', 'Sesión cerrada exitosamente');
     }
 }
