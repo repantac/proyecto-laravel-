@@ -184,27 +184,6 @@ En el login, el campo **usuario** acepta email o nombre. Debes elegir el **tipo 
 
 ---
 
-## Rutas principales
-
-| Método | Ruta | Nombre | Descripción |
-|--------|------|--------|-------------|
-| GET | `/` | `login` | Formulario de inicio de sesión |
-| POST | `/login` | `login.post` | Procesar login |
-| POST | `/logout` | `logout` | Cerrar sesión |
-| GET | `/portal-cliente` | `portal.cliente` | Portal del cliente |
-| GET | `/casos` | `casos.index` | Lista de casos (profesional) |
-| GET | `/casos/create` | `casos.create` | Formulario nuevo caso |
-| POST | `/casos` | `casos.store` | Guardar caso |
-| GET | `/casos/{id}` | `casos.show` | Detalle del caso |
-| GET | `/casos/{id}/edit` | `casos.edit` | Editar caso |
-| PUT/PATCH | `/casos/{id}` | `casos.update` | Actualizar caso |
-| DELETE | `/casos/{id}` | `casos.destroy` | Eliminar caso |
-| POST | `/clientes` | `clientes.store` | Crear cliente (JSON) |
-
-> El middleware `auth` en las rutas de casos puede activarse cuando quieras exigir sesión obligatoria en todas las acciones del CRUD.
-
----
-
 ## Base de datos
 
 ### Tabla `users`
@@ -224,90 +203,6 @@ Usuarios del sistema (clientes y profesionales comparten la misma tabla).
 | `cliente_id` | FK → `users` |
 | `profesional_id` | FK → `users` (dueño del caso en el portal) |
 
----
-
-## Subir el proyecto a GitHub
-
-Este repositorio ya está conectado a:
-
-**https://github.com/repantac/proyecto-laravel-fase3**
-
-Si trabajas en otra máquina o quieres repetir el proceso desde cero, los pasos generales son:
-
-### 1. Cuenta y repositorio en GitHub
-
-1. Crear cuenta en [github.com](https://github.com) si no tienes una.
-2. En GitHub: **New repository** → nombre (ej. `proyecto-laravel`) → **Create repository** (sin README si ya tienes uno local).
-
-### 2. Tener Git instalado
-
-En Mac, en Terminal:
-
-```bash
-git --version
-```
-
-Si no está instalado, Git te pedirá instalar las Command Line Tools de Xcode.
-
-### 3. En la carpeta del proyecto
-
-```bash
-cd /Applications/XAMPP/xamppfiles/htdocs/proyecto-laravel
-```
-
-Ver estado:
-
-```bash
-git status
-```
-
-Guardar cambios (ejemplo):
-
-```bash
-git add README.md
-git add .
-git commit -m "Documentación del proyecto y últimos ajustes"
-```
-
-### 4. Enlazar con GitHub (solo la primera vez)
-
-Si aún no hay `origin`:
-
-```bash
-git remote add origin https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-```
-
-En este proyecto ya existe:
-
-```bash
-git remote -v
-```
-
-### 5. Subir al remoto
-
-```bash
-git push -u origin main
-```
-
-GitHub pedirá **usuario** y **contraseña**. La contraseña ya no es la de la cuenta: debes usar un **Personal Access Token** (Settings → Developer settings → Personal access tokens → Generate new token).
-
-### Si Git rechaza el `push` (historiales distintos)
-
-A veces el repositorio en GitHub se creó subiendo archivos por la web y el historial local es diferente. Si estás segura de que **tu copia en la Mac es la correcta** y nadie más colabora en el repo:
-
-```bash
-git push -u origin main --force
-```
-
-⚠️ `--force` sobrescribe lo que hay en GitHub. Úsalo solo si entiendes que reemplazarás la versión remota.
-
-### Qué NO subir a GitHub
-
-- `.env` (contraseñas y claves)
-- Carpeta `vendor/` (se regenera con `composer install`)
-- Base de datos local
-
-Todo eso ya está contemplado en `.gitignore`.
 
 ---
 
